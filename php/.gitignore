@@ -1,0 +1,9 @@
+vendor/
+.phpunit.result.cache
+!var/cache/.gitkeep
+var/cache/*
+var/coverage/*
+!var/log/.gitkeep
+var/log/*
+composer.lock
+composer.phar

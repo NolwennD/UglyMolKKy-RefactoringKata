@@ -1,0 +1,28 @@
+{
+    "require": {
+        "php": "~8.1"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3",
+        "pestphp/pest": "^2",
+        "infection/infection": "^0.27",
+        "phpunit/phpunit": "^10",
+        "phpstan/phpstan": "^1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "infection/extension-installer": true
+        }
+    }
+}

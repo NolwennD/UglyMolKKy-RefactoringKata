@@ -3,4 +3,6 @@ java/.project
 java/.settings
 java/.classpath
 java/target/
+php/vendor
+**/node_modules
 
