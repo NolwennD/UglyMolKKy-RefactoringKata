@@ -78,6 +78,7 @@ describe('The molkky $game ', function() {
         $game->shoot(6, 3, 4);
 
         expect($game->score())->toBe(25);
+        expect($game->state())->toBe("RUNNING");
     });
     it("Score 25 when overflow 50 2", function() {
         $game = new Molkky();

@@ -126,6 +126,7 @@ class MolkkyTest {
     game.shoot(12, 1, 2, 2);
 
     assertThat(game.score()).isEqualTo(25);
+    assertThat(game.state()).isEqualTo("RUNNING");
   }
 
   @Test

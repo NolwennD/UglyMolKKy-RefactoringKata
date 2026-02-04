@@ -83,7 +83,7 @@ public class Molkky {
   }
 
   public String state() {
-    if(state == null) {
+    if(state == null || state == "SCORE OVERFLOW") {
       state = "RUNNING";
     }
 

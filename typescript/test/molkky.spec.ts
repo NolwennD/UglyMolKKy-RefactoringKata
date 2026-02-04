@@ -88,6 +88,7 @@ describe("The molkky game ", () => {
     game.shoot([12, 12]);
 
     expect(game.score()).toBe(25);
+    expect(game.state()).toBe("RUNNING");
   });
   it("Won game when score 50", () => {
     const game = new Molkky();

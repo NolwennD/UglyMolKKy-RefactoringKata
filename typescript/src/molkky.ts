@@ -81,7 +81,7 @@ export class Molkky {
   }
 
   public state(): string {
-    if (this.currentState == null) {
+    if (this.currentState == null || this.currentState == "SCORE OVERFLOW") {
       this.currentState = "RUNNING";
     }
 

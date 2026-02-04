@@ -86,7 +86,7 @@ class Molkky
 
     public function state(): string
     {
-        if ($this->state == null) {
+        if ($this->state == null || $this->state == "SCORE OVERFLOW") {
             $this->state = "RUNNING";
         }
 

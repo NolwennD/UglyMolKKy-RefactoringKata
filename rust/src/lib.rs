@@ -103,7 +103,11 @@ impl Molkky {
 
     fn state(&self) -> String {
         let res = self.state.clone();
-        res.unwrap_or("RUNNING".into())
+        match res {
+            Some(val) if val == "SCORE OVERFLOW".to_owned() => "RUNNING".into(),
+            Some(state) => state,
+            None => "RUNNING".into(),
+        }
     }
 }
 
@@ -208,6 +212,7 @@ mod tests {
         game.shoot(vec![12, 12]);
 
         assert_that!(game.score()).is_equal_to(25);
+        assert_that!(game.state()).is_equal_to("RUNNING".into());
     }
 
     #[test]
