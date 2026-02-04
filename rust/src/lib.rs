@@ -19,39 +19,42 @@ impl Molkky {
             duplicate: false,
         }
     }
-    fn shoot(&mut self, pinValue: Vec<u8>) {
+    fn shoot(&mut self, pin_value: Vec<u8>) {
         if self.state == Some("WON".into()) {
             self.state = Some("GAME ALREADY WON".into());
         }
         if !self.running && (self.fails == 3) {
             self.state = Some("GAME ALREADY LOST".into());
         } else {
-            if (pinValue.len() >= 1) && self.running {
-                let mut tmpPins: Vec<u8> = Vec::new();
-                for pin in &pinValue {
-                    if !tmpPins.contains(&pin) && (pin < &13) && (pin >= &1) {
-                        tmpPins.push(*pin);
+            if (pin_value.len() >= 1) && self.running {
+                let mut tmp_pins: Vec<u8> = Vec::new();
+                for pin in &pin_value {
+                    if !tmp_pins.contains(&pin) && (pin < &13) && (pin >= &1) {
+                        tmp_pins.push(*pin);
                     }
                 }
-                if tmpPins.len() != pinValue.len() {
+                if tmp_pins.len() != pin_value.len() {
                     self.duplicate = true;
                 }
-                if (self.score + tmpPins.len() as u8) > 50 {
+                if (self.score + tmp_pins.len() as u8) > 50 {
                     self.overflow = true;
                     self.score = 25;
                 } else {
                     self.overflow = false;
                     if self.duplicate {
-                        self.score += tmpPins.len() as u8;
+                        self.score += tmp_pins.len() as u8;
                     } else {
-                        self.score += pinValue.len() as u8;
+                        self.score += pin_value.len() as u8;
                     }
+                }
+                if self.overflow {
+                    self.state = Some("SCORE OVERFLOW".into())
                 }
                 self.fails -= 1;
-                if pinValue.len() == 1 {
-                    if ((self.score + pinValue[0]) - pinValue.len() as u8) < 51 {
-                        self.score += if (pinValue[0] > 0) && (13 > pinValue[0]) {
-                            pinValue[0] - 1
+                if pin_value.len() == 1 {
+                    if ((self.score + pin_value[0]) - pin_value.len() as u8) < 51 {
+                        self.score += if (pin_value[0] > 0) && (13 > pin_value[0]) {
+                            pin_value[0] - 1
                         } else {
                             0
                         };
@@ -61,19 +64,21 @@ impl Molkky {
                         self.overflow = true;
                     }
                 }
-                if (tmpPins.len() == 1) && self.duplicate {
-                    if 50 > ((self.score + tmpPins[0]) - (tmpPins.len() as u8 + 1)) {
+                if (tmp_pins.len() == 1) && self.duplicate {
+                    if 50 > ((self.score + tmp_pins[0]) - (tmp_pins.len() as u8 + 1)) {
                         self.score -= 1;
-                        self.score += if (tmpPins[0] < 1) || (tmpPins[0] > 12) {
+                        self.score += if (tmp_pins[0] < 1) || (tmp_pins[0] > 12) {
                             0
                         } else {
-                            tmpPins[0]
+                            tmp_pins[0]
                         };
                         self.overflow = false;
                     } else {
                         self.score = 25;
-                        self.state = Some("SCORE OVERFLOW".into());
                         self.overflow = true;
+                    }
+                    if self.overflow {
+                        self.state = Some("SCORE OVERFLOW".into());
                     }
                 }
                 if self.score == 50 {
@@ -109,7 +114,7 @@ mod tests {
 
     #[test]
     fn should_have_zero_when_starting() {
-        let mut game = Molkky::new();
+        let game = Molkky::new();
 
         assert_that!(game.score()).is_equal_to(0);
     }

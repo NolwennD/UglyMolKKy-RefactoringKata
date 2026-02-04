@@ -42,6 +42,9 @@ class Molkky
                     $this->overFlow = false;
                     $this->score += $this->duplicate ? count($tmpPins) : count($pinValue);
                 }
+                if ($this->overFlow){
+                    $this->state = "SCORE OVERFLOW";
+                }
                 $this->fails -= 1;
                 if (count($pinValue) == 1) {
                     if (((($this->score + $pinValue[0]) - count($pinValue)) < 51)) {
@@ -58,8 +61,10 @@ class Molkky
                         $this->overFlow = false;
                     } else {
                         $this->score = 25;
-                        $this->state = "SCORE OVERFLOW";
                         $this->overFlow = true;
+                    }
+                    if ($this->overFlow){
+                        $this->state = "SCORE OVERFLOW";
                     }
                 }
                 if ($this->score == 50) {

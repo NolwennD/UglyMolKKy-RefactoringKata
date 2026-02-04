@@ -40,6 +40,9 @@ public class Molkky {
           overFlow = false;
           score += duplicate ? tmpPins.size() : pinValue.length;
         }
+        if(overFlow){
+          state = "SCORE OVERFLOW";
+        }
         fails -= 1;
         if ((pinValue.length == 1)) {
           if((((score + pinValue[0]) - pinValue.length) < 51)) {
@@ -56,8 +59,10 @@ public class Molkky {
             overFlow = false;
           } else {
             score = 25;
-            state = "SCORE OVERFLOW";
             overFlow = true;
+          }
+          if(overFlow) {
+            state = "SCORE OVERFLOW";
           }
         }
         if(score == 50) {
