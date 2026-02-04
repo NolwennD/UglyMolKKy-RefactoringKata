@@ -8,3 +8,22 @@
 * If you miss pin three times in a row, game is over.
 * You win when your score is 50
 * Keep playing ended game does not have any effect.
+
+## Python
+
+Ce projet utilise [uv](https://docs.astral.sh/uv/) pour la gestion du projet Python.
+
+### Prérequis
+
+Assurez-vous d'avoir `uv` installé sur votre système.
+
+### Installation et exécution des tests
+
+Pour installer les dépendances et lancer les tests, exécutez la commande suivante depuis la racine du projet :
+
+```bash
+cd python
+uv run pytest
+```
+
+`uv` s'occupera automatiquement de créer l'environnement virtuel et d'installer les dépendances listées dans le fichier `pyproject.toml`.
