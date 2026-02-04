@@ -5,4 +5,6 @@ java/.classpath
 java/target/
 php/vendor
 **/node_modules
-
+**/__pycache__/
+**/bin/
+**/obj/
