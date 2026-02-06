@@ -8,3 +8,5 @@ php/vendor
 **/__pycache__/
 **/bin/
 **/obj/
+**/.vscode
+**/.metals
