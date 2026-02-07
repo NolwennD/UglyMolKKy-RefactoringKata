@@ -6,7 +6,9 @@ Step 1
 ```` To open nix shell
 nix-shell
 ````
+For [SDKMAN](https://sdkman.io/) users
 
+`sdk install scala && sdk install sbt`
 Step 2 : If you have scala build tool (sbt) on your machine you can do
 ````
 sbt
