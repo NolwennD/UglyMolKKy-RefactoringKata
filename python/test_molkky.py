@@ -123,8 +123,9 @@ def test_not_add_irrelevant_pins():
     game.shoot([4])
     game.shoot([-5])
     game.shoot([34])
-    game.shoot([2, 3])
-    assert game.score() == 6
+    game.shoot([0])
+    assert game.score() == 4
+    assert game.state() == "LOST"
 
 def test_not_add_duplicate_pins():
     game = Molkky()

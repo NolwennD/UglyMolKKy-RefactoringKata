@@ -139,9 +139,10 @@ describe("The molkky game ", () => {
     game.shoot([4]);
     game.shoot([-5]);
     game.shoot([34]);
-    game.shoot([2, 3]);
+    game.shoot([0]);
 
-    expect(game.score()).toBe(6);
+    expect(game.score()).toBe(4);
+    expect(game.state()).toBe("LOST");
   });
   it("Not add duplicate pins", () => {
     const game = new Molkky();

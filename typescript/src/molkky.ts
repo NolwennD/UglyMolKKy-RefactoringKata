@@ -36,7 +36,11 @@ export class Molkky {
             ? tmpPins.length
             : pinValue.length;
         }
-        this.fails -= 1;
+        if (tmpPins.length === 0) {
+          this.fails++;
+        } else {
+          this.fails = 0;
+        }
         if (pinValue.length == 1) {
           if (this.currentScore + pinValue[0] - pinValue.length < 51) {
             this.currentScore +=
@@ -76,6 +80,10 @@ export class Molkky {
           this.running = false;
         }
         this.fails += 1;
+      }
+      if (this.fails > 2) {
+        this.currentState = "LOST";
+        this.running = false;
       }
     }
   }

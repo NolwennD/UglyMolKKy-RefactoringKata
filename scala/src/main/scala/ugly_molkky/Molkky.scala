@@ -49,8 +49,11 @@ class Molkky {
         if (overFlow) {
           state = "SCORE OVERFLOW"
         }
-
-        fails -= 1
+        if (tmpPins.isEmpty) {
+          fails += 1
+        } else {
+          fails = 0
+        }
 
         if (pinValue.length == 1) {
           if (((score + pinValue.head) - pinValue.length) < 51) {
@@ -99,6 +102,10 @@ class Molkky {
 
         fails += 1
       }
+      if (fails > 2) {
+          state = "LOST"
+          running = false
+        }
     }
   }
 

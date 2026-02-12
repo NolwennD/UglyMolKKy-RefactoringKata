@@ -32,8 +32,10 @@ class Molkky:
                 else:
                     self.over_flow = False
                     self.current_score += len(tmp_pins) if self.duplicate else len(pin_value)
-
-                self.fails -= 1
+                if len(tmp_pins) == 0:
+                    self.fails += 1
+                else:
+                    self.fails = 0
 
                 if len(pin_value) == 1:
                     if self.current_score + pin_value[0] - len(pin_value) < 51:
@@ -67,6 +69,9 @@ class Molkky:
                     self.current_state = "LOST"
                     self.running = False
                 self.fails += 1
+            if self.fails > 2:
+                self.current_state = "LOST"
+                self.running = False
 
     def state(self):
         if self.current_state is None or self.current_state == "SCORE OVERFLOW":

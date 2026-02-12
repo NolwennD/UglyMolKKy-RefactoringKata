@@ -43,7 +43,11 @@ public class Molkky {
         if(overFlow){
           state = "SCORE OVERFLOW";
         }
-        fails -= 1;
+        if(tmpPins.isEmpty()) {
+          fails++;
+        } else {
+          fails += fails == 0 ? 0 : -1;
+        }
         if ((pinValue.length == 1)) {
           if((((score + pinValue[0]) - pinValue.length) < 51)) {
             score += (pinValue[0] > 0) && (13 > pinValue[0]) ? pinValue[0] - 1 : 0;
@@ -78,6 +82,10 @@ public class Molkky {
           running = false;
         }
         fails += 1;
+      }
+      if(fails > 2){
+        state = "LOST";
+        running = false;
       }
     }
   }

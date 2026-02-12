@@ -158,7 +158,7 @@ class MolkkyTest extends AnyFunSuite with Matchers {
     game.shoot(34)
 
     game.getScore() shouldEqual 4
-    game.getState() shouldEqual "RUNNING"
+    game.getState() shouldEqual "LOST"
   }
 
   test("Should not add points with more than twelve points pin") {

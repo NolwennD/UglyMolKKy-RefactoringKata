@@ -45,7 +45,11 @@ class Molkky
                 if ($this->overFlow){
                     $this->state = "SCORE OVERFLOW";
                 }
-                $this->fails -= 1;
+                if(empty($tmpPins)) {
+                    $this->fails++;
+                } else {
+                    $this->fails = 0;
+                }
                 if (count($pinValue) == 1) {
                     if (((($this->score + $pinValue[0]) - count($pinValue)) < 51)) {
                         $this->score += ($pinValue[0] > 0) && (13 > $pinValue[0]) ? $pinValue[0] - 1 : 0;
@@ -80,6 +84,10 @@ class Molkky
                     $this->running = false;
                 }
                 $this->fails += 1;
+            }
+            if($this->fails > 2) {
+                $this->state = "LOST";
+                $this->running = false;
             }
         }
     }

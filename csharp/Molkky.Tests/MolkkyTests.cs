@@ -172,8 +172,9 @@ namespace Molkky.Tests
             game.Shoot(new[] { 4 });
             game.Shoot(new[] { -5 });
             game.Shoot(new[] { 34 });
-            game.Shoot(new[] { 2, 3 });
-            Assert.Equal(6, game.Score());
+            game.Shoot(new[] { 0 });
+            Assert.Equal(4, game.Score());
+            Assert.Equal("GAME ALREADY LOST", game.State());
         }
 
         [Fact]

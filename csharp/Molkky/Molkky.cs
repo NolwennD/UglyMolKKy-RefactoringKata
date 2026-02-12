@@ -56,8 +56,14 @@ namespace Molkky
                         overFlow = false;
                         currentScore += duplicate ? tmpPins.Count : pinValue.Length;
                     }
-
-                    fails -= 1;
+                    if(!tmpPins.Any())
+                    {
+                        fails += 1;
+                    }
+                    else
+                    {
+                        fails = 0;
+                    }
 
                     if (pinValue.Length == 1)
                     {
@@ -116,6 +122,11 @@ namespace Molkky
                         running = false;
                     }
                     fails += 1;
+                }
+                if (fails > 2)
+                {
+                    currentState = "LOST";
+                    running = false;
                 }
             }
         }

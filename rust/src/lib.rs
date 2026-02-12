@@ -50,7 +50,11 @@ impl Molkky {
                 if self.overflow {
                     self.state = Some("SCORE OVERFLOW".into())
                 }
-                self.fails -= 1;
+                if tmp_pins.is_empty() {
+                    self.fails += 1;
+                } else {
+                    self.fails = self.fails.saturating_sub(1);
+                }
                 if pin_value.len() == 1 {
                     if ((self.score + pin_value[0]) - pin_value.len() as u8) < 51 {
                         self.score += if (pin_value[0] > 0) && (13 > pin_value[0]) {
@@ -94,6 +98,10 @@ impl Molkky {
                     self.running = false;
                 }
                 self.fails += 1;
+            }
+            if self.fails > 2 {
+                self.state = Some("LOST".into());
+                self.running = false;
             }
         }
     }
@@ -284,9 +292,10 @@ mod tests {
         game.shoot(vec![4]);
         game.shoot(vec![0]);
         game.shoot(vec![34]);
+        game.shoot(vec![42]);
 
         assert_that!(game.score()).is_equal_to(4);
-        assert_that!(game.state()).is_equal_to("RUNNING".into());
+        assert_that!(game.state()).is_equal_to("LOST".into());
     }
 
     #[test]
