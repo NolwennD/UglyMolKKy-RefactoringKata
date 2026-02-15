@@ -53,7 +53,7 @@ impl Molkky {
                 if tmp_pins.is_empty() {
                     self.fails += 1;
                 } else {
-                    self.fails = self.fails.saturating_sub(1);
+                    self.fails = 0;
                 }
                 if pin_value.len() == 1 {
                     if ((self.score + pin_value[0]) - pin_value.len() as u8) < 51 {
